@@ -21,7 +21,8 @@ const styles=StyleSheet.create({
     msgContainer:{
         flex:1,
         justifyContent:'center',
-        alignItems:'center'
+        alignItems:'center',
+        backgroundColor: '#3f2f25'
     },
     msgText: {
         fontSize:17,

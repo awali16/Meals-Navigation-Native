@@ -1,7 +1,7 @@
 import { FlatList } from "react-native";
 import { CATEGORIES } from "../data/dummy-data";
 import CategoryGridTitle from "../components/CategoryGridTile";
-import { useNavigation } from "@react-navigation/native";
+
 
 function CategoriesScreen({ navigation }) {
 
@@ -24,6 +24,7 @@ function CategoriesScreen({ navigation }) {
       keyExtractor={(item) => item.id}
       renderItem={renderCategoryItem}
       numColumns={2}
+      style={{ backgroundColor: '#3f2f25' }}
     />
   );
 }
