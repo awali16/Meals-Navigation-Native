@@ -26,6 +26,9 @@ export default function App() {
           drawerInactiveTintColor: "white",
           drawerActiveTintColor: "#351401",
           drawerActiveBackgroundColor: "#e4baa1",
+           drawerItemStyle: {
+            borderRadius: 6,
+          },
         }}
       >
         <Drawer.Screen
