@@ -1,29 +1,35 @@
 {
   "expo": {
-    "name": "newRecipies",
-    "slug": "newRecipies",
-    "version": "1.0.0",
+    "name": "My Meals and Recipes",
+    "slug": "MealsAndRecipes",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
-    "newArchEnabled": true,
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "ios": {
+      "buildNumber": "1.0.1",
       "supportsTablet": true
     },
     "android": {
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "package": "com.awali16.mymealsandrecipes"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "baa28737-8e15-4163-8f3a-3b0caa64e28d"
+      }
     }
   }
 }
