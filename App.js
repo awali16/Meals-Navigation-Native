@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet} from "react-native";
+import { SafeAreaView } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
@@ -26,7 +26,7 @@ export default function App() {
           drawerInactiveTintColor: "white",
           drawerActiveTintColor: "#351401",
           drawerActiveBackgroundColor: "#e4baa1",
-           drawerItemStyle: {
+          drawerItemStyle: {
             borderRadius: 6,
           },
         }}
@@ -66,43 +66,43 @@ export default function App() {
   }
 
   return (
-    <>
-      <StatusBar style="light" />
-      <NavigationContainer>
-        <Provider store={store}>
-          <FavouritesContextProvider>
-            <Stack.Navigator
-              screenOptions={{
-                headerStyle: { backgroundColor: "#351401" },
-                headerTintColor: "white",
-                contentStyle: { backgroundColor: "#3f2f25" },
-              }}
-            >
-              <Stack.Screen
-                name="DrawerScreen"
-                component={DrawerNavigator}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="MealsOverView"
-                component={Meals}
+      <SafeAreaView style={{ flex: 1, backgroundColor: "#351401" }}>
+        <StatusBar style="light" />
+        <NavigationContainer>
+          <Provider store={store}>
+            <FavouritesContextProvider>
+              <Stack.Navigator
+                screenOptions={{
+                  headerStyle: { backgroundColor: "#351401" },
+                  headerTintColor: "white",
+                  contentStyle: { backgroundColor: "#3f2f25" },
+                }}
+              >
+                <Stack.Screen
+                  name="DrawerScreen"
+                  component={DrawerNavigator}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="MealsOverView"
+                  component={Meals}
                 //  options={({route, navigation})=>{
                 //   const catId=route.params.categoryId;
                 //   return {
                 //     title: catId,
                 //   }
                 // }}
-              />
-              <Stack.Screen
-                name="MealDetails"
-                component={MealDetails}
-                options={{ title: "About the Meal" }}
-              />
-            </Stack.Navigator>
-          </FavouritesContextProvider>
-        </Provider>
-      </NavigationContainer>
-    </>
+                />
+                <Stack.Screen
+                  name="MealDetails"
+                  component={MealDetails}
+                  options={{ title: "About the Meal" }}
+                />
+              </Stack.Navigator>
+            </FavouritesContextProvider>
+          </Provider>
+        </NavigationContainer>
+      </SafeAreaView>
   );
 }
 
@@ -113,13 +113,4 @@ export default function App() {
 //             contentStyle: {backgroundColor:  "#3f2f25"}
 //           }}/>
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-    borderWidht: 1,
-    borderColor: "red",
-  },
-});
+

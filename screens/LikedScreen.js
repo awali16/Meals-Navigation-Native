@@ -27,7 +27,7 @@ const styles=StyleSheet.create({
     msgText: {
         fontSize:17,
         fontWeight:'bold',
-        color: "black"
+        color: "white"
     }
 })
 export default Liked;
