@@ -1,5 +1,4 @@
 import { StatusBar } from "expo-status-bar";
-import { SafeAreaView } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
@@ -12,6 +11,9 @@ import FavouritesContextProvider from "./store/context/favourites-Context";
 import { Provider } from "react-redux";
 import { store } from "./store/redux/store";
 import Liked from "./screens/LikedScreen";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import CustomHeaderDrawer from './components/CustomHeaderDrawer';
+import CustomHeaderStack from './components/CustomHeaderStack';
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 export default function App() {
@@ -35,7 +37,7 @@ export default function App() {
           name="Categories"
           component={CategoriesScreen}
           options={{
-            title: "All Categories",
+            header: () => <CustomHeaderDrawer title="All Categories" iconName="list" />,
             drawerIcon: ({ color, size }) => (
               <Ionicons name="list" color={color} size={size} />
             ),
@@ -45,7 +47,7 @@ export default function App() {
           name="Favourites"
           component={Favourites}
           options={{
-            title: "Favourite Meals",
+            header: () => <CustomHeaderDrawer title="Favourite Meals" iconName="star" />,
             drawerIcon: ({ color, size }) => (
               <Ionicons name="star" color={color} size={size} />
             ),
@@ -55,7 +57,7 @@ export default function App() {
           name="Liked"
           component={Liked}
           options={{
-            title: "Liked Meals",
+            header: () => <CustomHeaderDrawer title="Liked Meals" iconName="heart" />,
             drawerIcon: ({ color, size }) => (
               <Ionicons name="heart" color={color} size={size} />
             ),
@@ -66,6 +68,7 @@ export default function App() {
   }
 
   return (
+    <SafeAreaProvider>
       <SafeAreaView style={{ flex: 1, backgroundColor: "#351401" }}>
         <StatusBar style="light" />
         <NavigationContainer>
@@ -86,23 +89,36 @@ export default function App() {
                 <Stack.Screen
                   name="MealsOverView"
                   component={Meals}
-                //  options={({route, navigation})=>{
+                  //  options={({route, navigation})=>{
                 //   const catId=route.params.categoryId;
                 //   return {
                 //     title: catId,
                 //   }
                 // }}
+                  options={({ navigation }) => ({
+                    header: () => <CustomHeaderStack title="Meals Overview" navigation={navigation} />,
+                  })}
                 />
                 <Stack.Screen
                   name="MealDetails"
                   component={MealDetails}
-                  options={{ title: "About the Meal" }}
+                  options={({ route, navigation }) => {
+                    return {
+                      header: () => <CustomHeaderStack
+                        title="About the Meal"
+                        navigation={navigation}
+                        showIcons={true}
+                        route={route.params}
+                      />
+                    }
+                  }}
                 />
               </Stack.Navigator>
             </FavouritesContextProvider>
           </Provider>
         </NavigationContainer>
       </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
 

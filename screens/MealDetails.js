@@ -8,50 +8,9 @@ import IconButton from "../components/IconButton";
 import { FavouritesContext } from "../store/context/favourites-Context";
 import { useSelector, useDispatch } from "react-redux";
 import { likeMeal, dislikeMeal } from "../store/redux/liked";
-function MealDetails({ route, navigation }) {
-  const favouritesCtx = useContext(FavouritesContext);
-  const likedMealIds = useSelector((state) => state.likedMeals);
-  const dispatch = useDispatch();
+function MealDetails({ route }) {
   const mealId = route.params.MealId;
-  const MealIsFavourite = favouritesCtx.ids.includes(mealId);
-  const MealIsLiked = likedMealIds.ids.includes(mealId);
   const SelectedMeal = MEALS.find((meal) => meal.id === mealId);
-
-  function changeFavouriteStatusHandler() {
-    if (MealIsFavourite) {
-      favouritesCtx.removeFavourite(mealId);
-    } else {
-      favouritesCtx.addFavourite(mealId);
-    }
-  }
-  function changeLikedStatusHandler() {
-    if (MealIsLiked) {
-      dispatch(dislikeMeal({ id: mealId }));
-    } else {
-      dispatch(likeMeal({ id: mealId }));
-    }
-  }
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerRight: () => {
-        return (
-          <View style={styles.iconContainer}>
-            <IconButton
-              name={MealIsLiked ? "heart" : "heart-outline"}
-              color={"red"}
-              onPress={changeLikedStatusHandler}
-            />
-            <IconButton
-              name={MealIsFavourite ? "star" : "star-outline"}
-              color={"gold"}
-              onPress={changeFavouriteStatusHandler}
-            />
-          </View>
-        );
-      },
-    });
-  }, [navigation, mealId, MealIsFavourite, changeFavouriteStatusHandler]);
 
   return (
     <ScrollView style={styles.rootContainer}>
